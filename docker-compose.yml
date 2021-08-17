@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=admin
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+
+  postgresql:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_USER: "admin"
+
+  api:
+    container_name: api
+    build: "./api"
+    volumes:
+      - ./api:/api
+      - /api/node_modules
+    env_file: ./api/.env
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    ports:
+      - "3600:3600"
+
+  app:
+    container_name: app
+    build: "./app"
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    links:
+      - api
+    ports:
+      - "3000:3000"
