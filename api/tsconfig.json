@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "lib": [
+            "es6"
+        ],
+        "types": [
+            "node"
+        ],
+        "typeRoots": [
+            "./src/@types",
+            "./node_modules/@types"
+        ],
+        "allowJs": true,
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@modules/*": [
+                "modules/*"
+            ],
+            "@database/*": [
+                "database/*"
+            ],
+            "@utils/*": [
+                "utils/*"
+            ],
+            "@services/*": [
+                "services/*"
+            ],
+            "@middlewares/*": [
+                "middlewares/*"
+            ],
+            "@providers/*": [
+                "providers/*"
+            ],
+        }
+    }
+}
